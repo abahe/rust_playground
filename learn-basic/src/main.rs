@@ -10,12 +10,12 @@ fn hello_test() {
 }
 
 #[test]
-fn test2(){
+fn test2() {
     println!("ini test 2");
 }
 
 #[test]
-fn test_name(){
+fn test_name() {
     let name = "Boa Kwon";
     println!("hellow {}", name);
 
@@ -25,12 +25,16 @@ fn test_name(){
     println!("hellow {}", nama);
 }
 
-
 #[test]
-fn shadowing(){
+fn shadowing() {
     let name = "Boa Kwon";
     println!("hellow {}", name);
 
     let name = 10;
     println!("hellow {}", name);
 }
+
+/*
+multi baris
+ok good
+ */
