@@ -20,29 +20,162 @@ fn hello_test() {
 }
 
 #[test]
+fn ownership_rules() {
+    // a tidak bisa dikses disini, belum dideklarasikan
+    let a = 10; // a bisa diakses mulai disini
+
+    {
+        let b = 20;
+        println!("{}", b)
+    }
+}
+
+#[test]
+fn ownership_movement() {
+    let num1 = 20; // in stack!
+    println!("num1 : {}", num1);
+
+    let num2 = num1;
+
+    println!("num2 : {}", num2);
+    println!("num1 : {}", num1); //bisa karena di copy
+
+    let name1 = String::from("Jajang");
+
+    println!("name1 : {}", name1);
+
+    let name2 = name1;
+
+    println!("name2 : {}", name2);
+    // println!("name1 : {}", name1); //will be error
+    // kalau mau di clone !
+
+    let name3 = name2.clone();
+    println!("name3 : {}", name3);
+    println!("name2 : {}, masih bisa", name2);
+}
+
+#[test]
 fn test2() {
     println!("ini test 2");
 }
 
-// #[test]
-// fn stack_heap() {
-//     function_a();
-//     function_b();
-// }
+#[test]
+fn stack_heap() {
+    function_a();
+    function_b();
+}
 
-// fn function_a() {
-//     let a = 10;
-//     let b = String::from("Kanu");
+fn function_a() {
+    let a = 10;
+    let b = String::from("Kanu");
 
-//     println!("{}, {}", a, b);
-// }
+    println!("{}, {}", a, b);
+}
 
-// fn function_b() {
-//     let a = 10;
-//     let b = String::from("Nwanko");
+#[test]
+fn if_expres() {
+    let value = 9;
+    let result = if value >= 8 { "Good" } else { "Not good" };
 
-//     println!("{}, {}", a, b);
-// }
+    println!("cek : {}", result);
+}
+
+#[test]
+fn loop_expression() {
+    let mut counter = 0;
+    loop {
+        counter += 1;
+        if counter > 10 {
+            break;
+        } else if counter % 2 == 0 {
+            continue;
+        }
+
+        println!("Counter: {}", counter);
+    }
+}
+
+#[test]
+fn loop_return_value() {
+    let mut counter = 0;
+    let result = loop {
+        counter += 1;
+        if counter > 10 {
+            break counter * 2;
+        }
+    };
+
+    println!("Result: {}", result);
+}
+
+#[test]
+fn loop_label() {
+    let mut number = 1;
+    'outer: loop {
+        let mut i = 1;
+        loop {
+            if number > 10 {
+                break 'outer;
+            }
+
+            println!("{} x {} = {}", number, i, number * i);
+            i += 1;
+            if i > 10 {
+                break;
+            }
+        }
+        number += 1;
+    }
+}
+
+#[test]
+fn while_loop() {
+    let mut counter = 0;
+    while counter <= 10 {
+        if counter % 2 == 0 {
+            println!("Counter: {}", counter);
+        }
+
+        counter += 1;
+    }
+}
+
+#[test]
+fn array_iteration() {
+    let array = ["A", "B", "C", "D", "E"];
+    let mut index = 0;
+
+    while index < array.len() {
+        println!("Value: {}", array[index]);
+        index += 1;
+    }
+
+    for value in array {
+        println!("for iterate : {} ", value);
+    }
+
+    //range exclusive
+    let range = 0..5; // jadi 0-4 , 5 exclusi tidak dihitung
+    println!("Start: {}", range.start);
+    println!("End: {}", range.end);
+
+    for i in range {
+        println!("for iterate in range : {} ", i);
+    }
+
+    let range_inclusive = 0..=4;
+    for i in range_inclusive {
+        println!("for iterate in range inclusive : {} ", i);
+    }
+}
+
+fn function_b() {
+    let a = 10;
+    let b = String::from("Nwanko");
+
+    println!("{}, {}", a, b);
+}
 
 #[test]
 fn test_name() {
